@@ -13,30 +13,36 @@
 
 // Ratiorg needs statues of sizes 4, 5 and 7.
 
-// function makeArrayConsecutive2(statues) {
-    
-//     const newArr = statues.sort();
-//     statuesNeeded= 0;
-    
-//     for(var i=0; i<newArr.length-1; i++) {
-//         //If only 1 elem in array
-//         if (newArr.length === 1) {
-//             return statuesNeeded = 0;
-//         }
-//         //If more elems in array and diff greater than 1
-//          else if([newArr[i+1] - newArr[i] > 1 ]){
-//             statuesNeeded  = (statuesNeeded + (newArr[i+1] - newArr[i])) - 1;
-//         //If more elems in array and diff is 1
-//         } else if ([newArr[i+1] - newArr[i] === 1 ]) { 
-//             statuesNeeded ++;
-//         }
-//     }
-    
-//     return statuesNeeded; 
-    
-// }
+//**************************************************************
+//      Version 1
+//**************************************************************
 
-//console.log(makeArrayConsecutive2([6, 2, 3, 8]));
+function makeArrayConsecutive1(statues) {   
+    statues.sort( function(a,b){
+        return a - b;
+    });
+    statuesNeeded = 0;
+   
+    if (statues.length === 1) {
+        return statuesNeeded = 0;
+    }
+
+    for(var i=0; i<statues.length-1; i++) {
+        let diff = statues[i+1] - statues[i]; 
+
+        if( diff > 1 ){
+            statuesNeeded  = statuesNeeded + (diff - 1);
+        } 
+    }
+    return statuesNeeded; 
+}
+
+console.log(makeArrayConsecutive1([6, 2, 3, 8]));
+console.log(makeArrayConsecutive1([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
+
+//**************************************************************
+//      Version 2
+//**************************************************************
 
 function makeArrayConsecutive2(statues) {
     //Puts the array in numerical order
@@ -60,3 +66,7 @@ function makeArrayConsecutive2(statues) {
 
     return count;
 }
+
+console.log(makeArrayConsecutive2([6, 2, 3, 8])); 
+console.log(makeArrayConsecutive2([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])); 
+console.log(makeArrayConsecutive2([4, 2, 7, 18])); 
