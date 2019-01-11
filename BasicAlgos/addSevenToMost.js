@@ -6,7 +6,7 @@
 
 
 function addSevenToMost(arr) {
-    for(var i=1; i<arr.length; i++) {
+    for(var i=0; i<arr.length; i++) {
         arr[i] = arr[i] + 7;
     }
     return arr;
