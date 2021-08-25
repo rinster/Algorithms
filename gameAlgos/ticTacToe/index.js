@@ -1,3 +1,5 @@
+// Adapted from https://dev.to/bornasepic/pure-and-simple-tic-tac-toe-with-javascript-4pgn
+
 //Store status element
 const statusDisplay = document.querySelector('.game--status');
 
@@ -17,7 +19,7 @@ statusDisplay.innerHTML = currentPlayerTurn();
 
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
-    
+
     //Update the game state to reflect player moves and update the UI
     gameState[clickedCellIndex] = currentPlayer;
     clickedCell.innerHTML = currentPlayer;
@@ -25,7 +27,7 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 
 
 function handlePlayerChange() {
-    currentPlayer = currentPlayer === "X" ? "0" : 'X';
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusDisplay.innerHTML = currentPlayerTurn();
 }
 
@@ -44,7 +46,7 @@ const winningConditions = [
     [2, 4, 6]
 ];
 function handleResultValidation() {
-    let roundwon = false;
+    let roundWon = false;
     for (let i = 0; i <= 7; i++) {
         const winCondition = winningConditions[i];
         let a = gameState[winCondition[0]];
@@ -54,48 +56,57 @@ function handleResultValidation() {
             continue;
         }
         if (a === b && b === c) {
-            roundwon = true;
+            roundWon = true;
             break
         }
     }
-
-    //Winner was found, now update UI, set Active to false
-    if (roundwon) {
+    if (roundWon) {
         statusDisplay.innerHTML = winningMessage();
         gameActive = false;
         return;
     }
-
-    //Check if values in the game state array are still not populated with a 
-    //player sign. If all spaces are full then it's a draw
+    /* 
+    We will check weather there are any values in our game state array 
+    that are still not populated with a player sign
+    */
     let roundDraw = !gameState.includes("");
     if (roundDraw) {
         statusDisplay.innerHTML = drawMessage();
         gameActive = false;
         return;
     }
-
-    //Else if no one won the game yet and there are still moves to be played,
-    // continue by changing the current player
+    /*
+    If we get to here we know that the no one won the game yet, 
+    and that there are still moves to be played, so we continue by changing the current player.
+    */
     handlePlayerChange();
 }
 
-function handleCellClicked(clickedCellEvent) {
-
+function handleCellClick(clickedCellEvent) {
+/*
+We will save the clicked html element in a variable for easier further use
+*/    
     const clickedCell = clickedCellEvent.target;
-
-    //Grab data cell attribute index number
-    const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'))
-
-    //Check if cell is clicked already, if so, igonore the click
+/*
+Here we will grab the 'data-cell-index' attribute from the clicked cell to identify where that cell is in our grid. 
+Please note that the getAttribute will return a string value. Since we need an actual number we will parse it to an 
+integer(number)
+*/
+    const clickedCellIndex = parseInt(
+      clickedCell.getAttribute('data-cell-index')
+    );
+/* 
+Next up we need to check whether the call has already been played, 
+or if the game is paused. If either of those is true we will simply ignore the click.
+*/
     if (gameState[clickedCellIndex] !== "" || !gameActive) {
         return;
     }
-
-    //Otherwise proceed
+/* 
+If everything if in order we will proceed with the game flow
+*/    
     handleCellPlayed(clickedCell, clickedCellIndex);
     handleResultValidation();
-
 }
 
 function handleRestartGame() {
@@ -103,7 +114,8 @@ function handleRestartGame() {
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.innerHTML = currentPlayerTurn();
-    document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+    document.querySelectorAll('.cell')
+        .forEach(cell => cell.innerHTML = "");
 }
 
 // Handle event listeners to the actual game cells and the restart button
