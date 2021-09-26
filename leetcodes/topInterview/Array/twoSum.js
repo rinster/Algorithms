@@ -3,6 +3,9 @@
 //such that they add up to a specific target.
 //You may assume that each input would have exactly one solution, 
 //and you may not use the same element twice.
+//
+// TLDR; Find the indexes if two numbers that when summed up 
+// together match the TARGET
 //**************************************************************
 
 //Example:
