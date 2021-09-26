@@ -15,14 +15,14 @@
 
 // Solution--------------------------
 var twoSum = function(nums, target) {
-    //initialize object that will store the nums
+    //initialize hash that will store the two nums and their indices
     const ints = {}; 
     
     //loop through array
     for (let i=0; i<nums.length; i++) { 
 
         //if ints at a specific index of an array is greater than zero enter check pass
-        if (ints[nums[i] ] >=0) {
+        if (ints[nums[i] ] >= 0) {
 
             //store that nums in an array
             return [ints[nums[i]], i];
