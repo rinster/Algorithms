@@ -1,24 +1,18 @@
-//**************************************************************
-//Write a function that takes in a string and returns 
-//counts of each character in the string. 
-//**************************************************************
+/**
+ * Write a function that takes in a string and returns 
+ * counts of each character in the string. 
+ * 
+ * Examples:
+ * 
+ * charCount("aaaa")
+ * { a:4 } 
+ * 
+ * charCount("hello")
+ * {  h:1, e:1, l:2, o:1 }
+ * 
+ */
 
-//Examples:
 
-// charCount("aaaa")
-// {
-//     a:4
-// }
-
-//charCount("hello")
-// {
-//     h:1,
-//     e:1,
-//     l:2,
-//     o:1
-// }
-
-// Solution--------------------------
 function charCount(str) {
     //make object to return at end
     var result = {};
